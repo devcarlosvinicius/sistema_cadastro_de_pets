@@ -124,8 +124,7 @@ public class CadastroTest01 {
                                     break;
                             }
                         } while (escolhaCriterios < 1 || escolhaCriterios > 6);
-                        System.out.print("Qual pet deseja alterar: ");
-                        int numeroDoPet= scanner.nextInt();
+                        break;
                     }
                 default:
                     throw new IllegalArgumentException("Coloca os numeros certos bobao");
