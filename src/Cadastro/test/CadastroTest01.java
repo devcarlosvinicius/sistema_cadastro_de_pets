@@ -16,6 +16,8 @@ public class CadastroTest01 {
         Endereco endereco = new Endereco();
         Pet pet = new Pet();
         Criterios criterios = new Criterios();
+        ImprimeAlteracao imprimeAlteracao = new ImprimeAlteracao();
+        AlteraPet altera = new AlteraPet();
 
         try (Scanner scanner = new Scanner(System.in)) {
             cadastro.imprime();
@@ -124,8 +126,19 @@ public class CadastroTest01 {
                                     break;
                             }
                         } while (escolhaCriterios < 1 || escolhaCriterios > 6);
-                        break;
                     }
+                    System.out.print("Selecione o pet que deseja alterar: ");
+                    int escolhaPet = scanner.nextInt();
+                    imprimeAlteracao.imprime();
+                    int escolhaAlterar = scanner.nextInt();
+                    File arquivoAlterar = Criterios.FILES[escolhaPet - 1];
+                    System.out.print("Nova alteração: ");
+                    String alteracao = scanner.nextLine();
+                    alteracao = scanner.nextLine();
+                    altera.alteraPet(arquivoAlterar, escolhaAlterar, alteracao);
+                    break;
+                case 3:
+
                 default:
                     throw new IllegalArgumentException("Coloca os numeros certos bobao");
             }

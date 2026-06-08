@@ -1,18 +1,17 @@
 package Cadastro.dominio;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Criterios {
     File petsCadastrados = new File("src/petsCadastrados");
     public static int I = 0;
+    public static String[] PETS = new String[10];
+    public static File[] FILES = new File[10];
 
     public void buscaTipo(String tipo) {
         File[] files = petsCadastrados.listFiles();
         if (files != null) {
-            int i = 1;
+            int i = 0;
             for (File file : files) {
                 try (BufferedReader lerLinha2 = new BufferedReader(new FileReader(file));
                      BufferedReader resetLinha = new BufferedReader(new FileReader(file))) {
@@ -23,8 +22,11 @@ public class Criterios {
                         while ((linhas = resetLinha.readLine()) != null) {
                             lerPet.append(linhas.split("- ")[1]).append(" - ");
                         }
-                        System.out.println(i + ". " + lerPet.delete(lerPet.length() - 3, lerPet.length()));
+                        FILES[I] = file;
                         i++;
+                        PETS[I] = i + ". " + lerPet.delete(lerPet.length() - 3, lerPet.length());
+                        System.out.println(PETS[I]);
+                        I++;
                     }
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
@@ -45,6 +47,8 @@ public class Criterios {
 
     public void buscaCriterios(String tipo, int numeroLinha, String valor) {
         File[] files = petsCadastrados.listFiles();
+        int i = 0;
+        I = 0;
         if (files != null) {
             for (File file : files) {
                 try (BufferedReader criteriosDoPet = new BufferedReader(new FileReader(file));
@@ -62,11 +66,14 @@ public class Criterios {
                             valorLinha2 = linhaPet.readLine();
                         }
                         if (valorLinha2.toLowerCase().contains(valor.toLowerCase())) {
+                            FILES[I] = file;
                             while ((linhas = resetLinha.readLine()) != null) {
                                 listaPet.append(linhas.split("- ")[1]).append(" - ");
                             }
+                            i++;
+                            PETS[I] = i + ". " + listaPet.delete(listaPet.length() - 3, listaPet.length());
+                            System.out.println(PETS[I]);
                             I++;
-                            System.out.println(I + ". " + listaPet.delete(listaPet.length() - 3, listaPet.length()));
                         }
                     }
                 } catch (IOException e) {
