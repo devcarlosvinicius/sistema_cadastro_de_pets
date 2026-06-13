@@ -15,9 +15,11 @@ public class CadastroTest01 {
         Validar valida = new Validar();
         Endereco endereco = new Endereco();
         Pet pet = new Pet();
+        BuscaPet buscaPet = new BuscaPet();
         Criterios criterios = new Criterios();
         ImprimeAlteracao imprimeAlteracao = new ImprimeAlteracao();
         AlteraPet altera = new AlteraPet();
+        DeletaPet deletaPet = new DeletaPet();
 
         try (Scanner scanner = new Scanner(System.in)) {
             cadastro.imprime();
@@ -138,7 +140,22 @@ public class CadastroTest01 {
                     altera.alteraPet(arquivoAlterar, escolhaAlterar, alteracao);
                     break;
                 case 3:
-
+                    deletaPet.pesquisa();
+                    System.out.print("Qual Pet deseja deletar: ");
+                    int escolhaDeleta = scanner.nextInt();
+                    File deletarArquivo = DeletaPet.FILES[escolhaDeleta - 1];
+                    deletaPet.deletar(deletarArquivo, escolhaDeleta);
+                    break;
+                case 4:
+                    deletaPet.pesquisa();
+                    break;
+                case 5:
+                    System.out.print("Qual critério de busca: ");
+                    String criterio = scanner.nextLine();
+                    buscaPet.buscaPet(criterio);
+                    break;
+                case 6:
+                    break;
                 default:
                     throw new IllegalArgumentException("Coloca os numeros certos bobao");
             }
